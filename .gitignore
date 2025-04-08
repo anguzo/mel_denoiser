@@ -183,3 +183,5 @@ slurm-*.stat
 
 # DCGM GPU stats
 dcgm-gpu-stats-*.out
+
+lightning_logs/

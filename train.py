@@ -27,6 +27,12 @@ if __name__ == "__main__":
         default=None,
         help="Path to the last checkpoint (optional)",
     )
+    parser.add_argument(
+        "--sample_rate",
+        type=int,
+        default=44100,
+        help="Sample rate of the audio files",
+    )
     args = parser.parse_args()
 
     job_id = os.environ.get("SLURM_JOB_ID", "default")
@@ -49,7 +55,7 @@ if __name__ == "__main__":
         save_last=True,
     )
 
-    logging_callback = LoggingCallback()
+    logging_callback = LoggingCallback(sample_rate=args.sample_rate)
 
     model = MelDenoiser()
 
@@ -57,7 +63,7 @@ if __name__ == "__main__":
         data_dir=args.data_dir,
         batch_size=32,
         num_workers=8,
-        sample_rate=44100,
+        sample_rate=args.sample_rate,
         n_fft=2048,
         hop_length=512,
         n_mels=128,
