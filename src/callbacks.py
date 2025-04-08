@@ -162,6 +162,8 @@ class LoggingCallback(Callback):
             self.griffin_lim.to(self.device)
             self.si_sdr_loss.to(self.device)
             self.mrstft_loss.to(self.device)
+            self.si_sdr_metric.to(self.device)
+            self.mrstft_metric.to(self.device)
 
     def on_validation_epoch_start(self, trainer, pl_module):
         self._reset_metrics()
